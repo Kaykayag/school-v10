@@ -1,0 +1,181 @@
+/* --- 1. GLOBAL & WRAPPER STYLES --- */
+:root {
+  --indigo-primary: indigo; 
+  --bg-gray: #e0e0e0;
+  --success-green: #10b981;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background-color: var(--bg-gray);
+  width: 100%;
+  overflow-x: hidden; /* Fixes the side-scrolling issue */
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* --- 2. THE INDIGO HEADER --- */
+.indigo-banner {
+  background-color: var(--indigo-primary);
+  color: white;
+  padding: 0;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.indigo-banner h1 {
+  font-size: 1.25rem;
+  letter-spacing: 1px;
+}
+
+/* --- 3. THE CONTAINER & GLASS CARD --- */
+.container {
+  padding: 2rem 1rem; /* Use rem for better scaling */
+  display: flex;
+  justify-content: center; 
+  align-items: flex-start;
+  min-height: 80vh;
+  width: 100%;
+}
+
+.glass-card {
+  background: white;
+  width: 100%;           /* Full width on small screens */
+  max-width: 1100px;     /* Keeps original size on your laptop */
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 0 auto;
+  overflow: hidden;      /* Keeps the table inside the rounded corners */
+}
+
+.card-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h3 {
+  color: #1e293b;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+/* --- 4. THE STUDENT TABLE (ADAPTIVE FIX) --- */
+/* This wrapper prevents the table from breaking the card layout on mobile */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Ensures the table doesn't get squashed too small */
+}
+
+.student-table th {
+  background-color: #f8fafc;
+  text-align: left;
+  padding: 1rem;
+  color: #64748b;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.student-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  font-size: 0.9rem;
+}
+
+.action-cell {
+  display: flex;
+  gap: 8px;
+}
+
+.action-cell button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.edit-icon { background: #eff6ff; color: #2563eb; }
+.delete-icon { background: #fef2f2; color: #dc2626; }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Automatically switches to 1 column on mobile */
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-grid input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.form-grid input:focus {
+  outline: none;
+  border-color: var(--indigo-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.save-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--success-green);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto; 
+  -webkit-overflow-scrolling: touch; 
+}
+
+
+.student-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 650px; 
+}
+
+.action-cell {
+  display: flex;
+  gap: 8px;
+  white-space: nowrap; 
+}
