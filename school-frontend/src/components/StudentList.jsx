@@ -1,6 +1,6 @@
 import React from 'react';
 
-function StudentList({ students, onDelete }) {
+function StudentList({ students, onDelete, onEdit }) {
   return (
     <div className="table-container">
     <table className="student-table">
@@ -23,8 +23,8 @@ function StudentList({ students, onDelete }) {
             <td>{s.firstname}</td>
             <td>{s.course}</td>
             <td className="action-cell">
-              <button className="edit-icon">Update</button>
-              <button className="delete-icon" onClick={() => onDelete(s.id)}>Delete</button>
+              <button className="edit-icon" onClick={() => onEdit(s)}>✍️</button>
+              <button className="delete-icon" onClick={() => onDelete(s.id)}>❌</button>
             </td>
           </tr>
         ))}

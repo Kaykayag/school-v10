@@ -16,9 +16,7 @@ app.use("/students",students)
 app.get("/",(req,res)=>{
 	return res.json({'message':'hello world'});
 });
-
-const server = app.listen(port,()=>{
-	require('dns').lookup(require('os').hostname(),(err,addr,fam)=>{
-		console.log(`listening at http://${addr}:${port}`);
-	});
+const host = '127.0.0.1';
+const server = app.listen(port, host, () => {
+    console.log(`listening at http://localhost:${port}`);
 });

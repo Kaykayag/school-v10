@@ -32,13 +32,13 @@ router.get("/",(req,res)=>{
 });
 
 router.get("/:id",(req,res)=>{
-	let idno = req.params.idno
+	let id = req.params.id;
 	let sql="SELECT * FROM `"+table+"` WHERE `id`=?";
 	connect();
 	conn.all(sql,[id],(err,rows)=>{
 		close()
 		if(err) return res.status(500).json(err);
-			return res.status(200).json(rows);
+		return res.status(200).json(rows);
 	})
 });
 
@@ -58,16 +58,13 @@ router.post("/",(req,res)=>{
 	let data = req.body;
 	let keys = Object.keys(data);
 	let values = Object.values(data);
-	
+
 	let fld = keys.join("`,`");
 	let qmarks = keys.map(() => '?').join(",");
 
-	keys.forEach((key)=>{ qmark.push('?')})
-	let q = qmark.join(",")
-	
-	let sql="INSERT INTO `"+table+"`(`"+fld+"`) VALUES (q)";
+	let sql="INSERT INTO `"+table+"`(`"+fld+"`) VALUES ("+qmarks+")";
 	console.log(sql);
-	
+
 	connect();
 	conn.run(sql,values,(err)=>{
 		close()
@@ -76,28 +73,21 @@ router.post("/",(req,res)=>{
 	})
 });
 
-router.put("/",(req,res)=>{
+router.put("/:id",(req,res)=>{
+	let id = req.params.id;
 	let data = req.body;
 	let keys = Object.keys(data);
 	let values = Object.values(data);
-	
-	let newvalues=[]
-	let fld = []
-	for (let i=1;i<keys.length;i++){
-		fld.push("`"+keys[i]+"`=?");
-		newvalues.push(values[i]);
-	}
-	
-	let flds = fld.join(",");
-	let sets = keys.map(key => `\`${key}\` = ?`).join(", ");
-	let sql="UPDATE `"+table+"` SET "+flds+" WHERE `"+keys[0]+"`="+values[0];
+
+	let setClause = keys.map(key => `\`${key}\`=?`).join(", ");
+	let sql = `UPDATE \`${table}\` SET ${setClause} WHERE id=?`;
 	console.log(sql);
 	connect();
-	conn.run(sql,newvalues,(err)=>{
-		close()
-		if(err) return res.status(500).json(err);
-			return res.status(200).json({'message':'Student Updated'});
-	})
+	conn.run(sql, [...values, id], (err) => {
+		close();
+		if (err) return res.status(500).json(err);
+		return res.status(200).json({ 'message': 'Student Updated' });
+	});
 });
 
 
